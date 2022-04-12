@@ -12,7 +12,7 @@ int main()
 {
     double x[10] = {1, 2, 3, 4, 5};
 
-    double *p = find(x, x + 5, 5.0f);
+    double *p = std::find(x, x + 5, 5.0f);
 
     if (p == x + 5)
         std::cout << "not found" << std::endl;
