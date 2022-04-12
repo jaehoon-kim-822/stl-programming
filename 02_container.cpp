@@ -41,8 +41,10 @@ public:
         head = new Node<T>(a, head);
     }
 
-    slist_iterator<T> begin() { return slist_iterator<T>(head); }
-    slist_iterator<T> end() { return slist_iterator<T>(nullptr); }
+    using iterator = slist_iterator<T>;
+
+    iterator begin() { return iterator(head); }
+    iterator end() { return iterator(nullptr); }
 };
 
 int main()
@@ -55,7 +57,7 @@ int main()
     s.push_front(40);
     s.push_front(50);
 
-    slist_iterator<int> p = s.begin();
+    slist<int>::iterator p = s.begin();
 
     std::cout << *p << std::endl; // 50
     ++p;                          // slist s는 array와 다르게, 각 요소가 떨어진 공간에 있지만, 재정의된 ++ 연산으로 다음 요소로 이동 가능.
