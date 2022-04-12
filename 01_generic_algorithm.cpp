@@ -1,6 +1,7 @@
 #include <iostream>
 
-char *xstrchr(char *first, char *last, int c)
+template <typename T>
+T *find(T *first, T *last, T c)
 {
     while (first != last && *first != c)
         ++first;
@@ -9,9 +10,9 @@ char *xstrchr(char *first, char *last, int c)
 
 int main()
 {
-    char s[] = "abcdefgh";
+    double x[10] = {1, 2, 3, 4, 5};
 
-    char *p = xstrchr(s, s + 4, 'c');
+    double *p = find(x, x + 5, 5.0);
 
     if (p == nullptr)
         std::cout << "not found" << std::endl;
