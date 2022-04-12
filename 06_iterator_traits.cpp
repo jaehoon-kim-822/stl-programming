@@ -1,10 +1,24 @@
 #include <iostream>
 #include <list>
 
+// for iterator
 template <typename T>
-typename T::value_type sum(T first, T last)
+struct iterator_traits
 {
-    typename T::value_type s = 0;
+    using value_type = typename T::value_type;
+};
+
+// for primitive type
+template <typename T>
+struct iterator_traits<T *>
+{
+    using value_type = T;
+};
+
+template <typename T>
+typename iterator_traits<T>::value_type sum(T first, T last)
+{
+    typename iterator_traits<T>::value_type s = 0;
 
     while (first != last)
     {
@@ -17,8 +31,11 @@ typename T::value_type sum(T first, T last)
 int main()
 {
     std::list<int> s = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int x[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-    int n = sum(std::begin(s), std::end(s));
+    int n1 = sum(std::begin(s), std::end(s));
+    int n2 = sum(x, x + 10);
 
-    std::cout << n << std::endl; // 55
+    std::cout << n1 << std::endl; // 55
+    std::cout << n2 << std::endl; // 55
 }
