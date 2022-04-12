@@ -5,7 +5,7 @@ T1 find(T1 first, T1 last, T2 value)
 {
     while (first != last && *first != value)
         ++first;
-    return first == last ? nullptr : first;
+    return first
 }
 
 int main()
@@ -14,7 +14,7 @@ int main()
 
     double *p = find(x, x + 5, 5.0f);
 
-    if (p == nullptr)
+    if (p == x + 5)
         std::cout << "not found" << std::endl;
     else
         std::cout << "found : " << *p << std::endl;
