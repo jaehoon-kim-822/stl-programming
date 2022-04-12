@@ -21,3 +21,12 @@ int main()
     std::vector<double> dv = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     print_first_element(dv);
 }
+
+// template 기반 컨테이너를 만들 때, 컨테이너가 저장하는 타입을 외부에서 알고 싶을 떄가 있다.
+template <typename T>
+class list
+{
+public:
+    // 해당 컨테이너의 타입을 참조할 수 있도록, 아래 같은 형태로 만들도록 약속 함.
+    using value_type = T;
+};
