@@ -1,9 +1,10 @@
 #include <iostream>
 #include <list>
 
-int sum(int *first, int *last)
+template <typename T>
+typename T::value_type sum(T first, T last)
 {
-    int s = 0;
+    typename T::value_type s = 0;
 
     while (first != last)
     {
@@ -15,9 +16,9 @@ int sum(int *first, int *last)
 
 int main()
 {
-    int s[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::list<int> s = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-    int n = sum(s, s + 10);
+    int n = sum(std::begin(s), std::end(s));
 
     std::cout << n << std::endl; // 55
 }
