@@ -11,15 +11,38 @@ struct Node
 };
 
 template <typename T>
+class slist_iterator
+{
+    Node<T> *current;
+
+public:
+    slist_iterator(Node<T> *p = nullptr) : current(p) {}
+
+    slist_iterator &operator++()
+    {
+        current = current->next;
+        return *this;
+    }
+
+    T &operator*() { return current->data; }
+
+    bool operator==(const slist_iterator &it) const { return current == it.current; }
+    bool operator!=(const slist_iterator &it) const { return current != it.current; }
+};
+
+template <typename T>
 class slist
 {
-    Node<T> *head = 0;
+    Node<T> *head = nullptr;
 
 public:
     void push_front(const T &a)
     {
         head = new Node<T>(a, head);
     }
+
+    slist_iterator<T> begin() { return slist_iterator<T>(head); }
+    slist_iterator<T> end() { return slist_iterator<T>(nullptr); }
 };
 
 int main()
@@ -31,4 +54,10 @@ int main()
     s.push_front(30);
     s.push_front(40);
     s.push_front(50);
+
+    slist_iterator<int> p = s.begin();
+
+    std::cout << *p << std::endl; // 50
+    ++p;                          // slist s는 array와 다르게, 각 요소가 떨어진 공간에 있지만, 재정의된 ++ 연산으로 다음 요소로 이동 가능.
+    std::cout << *p << std::endl; // 40
 }
