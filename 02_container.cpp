@@ -36,16 +36,25 @@ class slist
     Node<T> *head = nullptr;
 
 public:
+    using value_type = T; // STL 규칙, 4_typename1,cpp, 4_typename2.cpp
+    using iterator = slist_iterator<T>;
+
     void push_front(const T &a)
     {
         head = new Node<T>(a, head);
     }
 
-    using iterator = slist_iterator<T>;
-
     iterator begin() { return iterator(head); }
     iterator end() { return iterator(nullptr); }
 };
+
+template <typename T1, typename T2>
+T1 find(T1 first, T1 last, T2 value)
+{
+    while (first != last && *first != value)
+        ++first;
+    return first
+}
 
 int main()
 {
@@ -62,4 +71,26 @@ int main()
     std::cout << *p << std::endl; // 50
     ++p;                          // slist s는 array와 다르게, 각 요소가 떨어진 공간에 있지만, 재정의된 ++ 연산으로 다음 요소로 이동 가능.
     std::cout << *p << std::endl; // 40
+
+    slist<int>::iterator p = find(s.begin(), s.end(), 30);
+
+    if (p == s.end())
+    {
+        std::cout << "검색 실패" << std::endl;
+    }
+    else
+    {
+        std::cout << "검색 성공" << std::endl;
+    }
+
+    slist<int>::iterator p = std::find(s.begin(), s.end(), 30);
+
+    if (p == s.end())
+    {
+        std::cout << "검색 실패" << std::endl;
+    }
+    else
+    {
+        std::cout << "검색 성공" << std::endl;
+    }
 }
