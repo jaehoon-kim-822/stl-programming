@@ -1,11 +1,16 @@
 #include <vector>
 
-template <typename T>
+template <typename T, typename Alloc = std::allocator<T>>
 class vector
 {
+    alloc ax;
+
 public:
     void resize(int sz)
     {
+        T *buf = ax.allocate(sz);
+        // maybe. need to copy data.
+        ax.deallocate(buf, size);
     }
 };
 
