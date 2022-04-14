@@ -12,6 +12,7 @@ public:
     ~Car() { std::cout << "~Car" << std::endl; }
 };
 
+template <typename T>
 class Ptr
 {
     Car *obj;
@@ -27,7 +28,7 @@ public:
 int main()
 {
     // Ptr의 멤버변수로 Car의 포인터가 있긴 하나, 객체 자체를 Car의 포인터처럼 사용: 스마트 포인터
-    Ptr p = new Car; // Ptr p(new Car);
+    Ptr<int> p = new Car; // Ptr p(new Car);
 
     p->Go(); // p.operator->()Go() => (p.operator->())->Go()
 
