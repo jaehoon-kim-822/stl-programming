@@ -9,7 +9,7 @@ struct People
     People(std::string n) : name(n) {}
     ~People() { std::cout << name << "detroyed" << std::endl; }
 
-    std::shared_ptr<People> bf;
+    People *bf; // shared_ptr 대신 primitive pointer 사용.
 };
 
 int main()
@@ -17,6 +17,6 @@ int main()
     std::shared_ptr<People> sp1(new People("kim"));
     std::shared_ptr<People> sp2(new People("lee"));
 
-    sp1->bf = sp2;
-    sp2->bf = sp1;
+    sp1->bf = sp2.get();
+    sp2->bf = sp1.get();
 }
